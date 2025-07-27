@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #00e1ff;
+}
+
+.video-wrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 3px solid #00e1ff;
+  margin-bottom: 16px;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 12px 20px;
+  background: #00e1ff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #00c8df;
+}
+
+.btn-secondary {
+  background: #555;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #444;
+}
+
+.section-title {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+  color: #ccc;
+}
+
+.preview-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.preview-item {
+  background-color: #1f1f1f;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.preview-item img {
+  max-width: 80px;
+  border-radius: 10px;
+  border: 2px solid #00e1ff;
+}
+
+.delete-btn {
+  padding: 6px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
