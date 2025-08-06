@@ -1,47 +1,242 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Untitled</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kamera Stamp</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <title>Clipboard Tugas</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #1e293b;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    label {
+      font-weight: bold;
+      color: #475569;
+    }
+    input, select, textarea, button {
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #1d4ed8;
+    }
+    textarea {
+      width: 100%;
+      margin-top: 20px;
+      height: 200px;
+      resize: none;
+      background: #f8fafc;
+    }
+    #wa-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    #wa-buttons button {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    #wa-buttons button:hover {
+      background-color: #1DA851;
+    }
+  </style>
 </head>
 <body>
-  <div class="app-container">
-    <h1 class="title">📸 Kamera Stamp</h1>
+  <div class="container">
+    <h1>📄 Tugas Harian</h1>
+    <form id="taskForm">
+      <label>Jenis Pekerjaan</label>
+      <select id="jenis" required>
+        <option value="">-- Pilih Jenis --</option>
+        <option value="Daily Activity">Daily Activity</option>
+        <option value="RKB">RKB</option>
+        <option value="Request Klien">Request Klien</option>
+        <option value="Big Cleaning">Big Cleaning</option>
+      </select>
 
-    <div class="video-wrapper">
-      <video id="video" autoplay muted playsinline></video>
+      <label>Nama Pekerjaan</label>
+      <input type="text" id="pekerjaan" required />
+
+      <label>Area</label>
+      <input type="text" id="area" required />
+
+      <label>Hari & Tanggal</label>
+      <input type="date" id="tanggal" required />
+      <input type="text" id="hariTanggal" readonly placeholder="Hari dan tanggal akan muncul di sini" />
+
+      <label>Durasi Pengerjaan</label>
+      <div style="display: flex; gap: 10px;">
+        <input type="time" id="jamMulai" required />
+        <input type="time" id="jamSelesai" required />
+      </div>
+
+      <label>Due Date</label>
+      <input type="date" id="duedate" required />
+      <input type="text" id="hariDue" readonly placeholder="Hari due date akan muncul di sini" />
+
+      <label>Pembuat Tugas</label>
+      <select id="pembuat" required>
+        <option value="">-- Pilih --</option>
+        <option value="Pohara Ayub">Pohara Ayub</option>
+        <option value="Sadulloh">Sadulloh</option>
+      </select>
+
+      <label>Penerima Tugas</label>
+      <select id="penerima" required>
+        <option value="">-- Pilih --</option>
+        <option value="Edi Ahmad Jubaedi">Edi Ahmad Jubaedi</option>
+        <option value="Saiful Bahri">Saiful Bahri</option>
+        <option value="Wahidin">Wahidin</option>
+        <option value="Amrullah">Amrullah</option>
+        <option value="Ade Surahman">Ade Surahman</option>
+        <option value="Siti Maemunah">Siti Maemunah</option>
+        <option value="Sulaiman">Sulaiman</option>
+        <option value="Muhammad Toni">Muhammad Toni</option>
+        <option value="M. Rifai">M. Rifai</option>
+      </select>
+
+      <label>Status Tugas</label>
+      <select id="status" required>
+        <option value="Belum dikerjakan">Belum dikerjakan</option>
+        <option value="Sedang dikerjakan">Sedang dikerjakan</option>
+        <option value="Selesai">Selesai</option>
+      </select>
+
+      <button type="submit">🧾 Salin ke Clipboard</button>
+    </form>
+
+    <textarea id="output" readonly placeholder="Hasil akan muncul di sini..."></textarea>
+
+    <div class="link-member">
+      <p><strong>📱 Kirim Tugas ke WhatsApp:</strong></p>
+      <div id="wa-buttons"></div>
     </div>
-
-    <div class="button-group">
-      <button id="captureBtn" class="btn">Ambil Foto</button>
-      <button id="downloadPdfBtn" class="btn btn-secondary">Download PDF</button>
-      <button id="clearAllBtn" class="btn btn-danger">Hapus Semua</button>
-    </div>
-
-    <canvas id="canvas" style="display: none;"></canvas>
-
-    <h2 class="section-title">🖼️ Foto Diambil</h2>
-    <div id="previewList" class="preview-gallery"></div>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
+  <script>
+    const hariIndo = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const nomorWA = {
+      "Pohara Ayub": "6289637126728",
+      "Sadulloh": "6285281587927",
+      "Edi Ahmad Jubaedi": "6285883524329",
+      "Saiful Bahri": "6281389327308",
+      "Wahidin": "6283819602330",
+      "Ade Surahman": "6281947172711",
+      "Amrullah": "6283879624040",
+      "Siti Maemunah": "6285771090915",
+      "Sulaiman": "6285716230391",
+      "Muhammad Toni": "6281286448626",
+      "M. Rifai": "6285810611074"
+    };
 
+    const tanggalInput = document.getElementById('tanggal');
+    const hariTanggalInput = document.getElementById('hariTanggal');
+    const dueInput = document.getElementById('duedate');
+    const hariDueInput = document.getElementById('hariDue');
+
+    tanggalInput.addEventListener('change', function () {
+      const tanggal = new Date(this.value);
+      if (!isNaN(tanggal.getTime())) {
+        const hari = hariIndo[tanggal.getDay()];
+        hariTanggalInput.value = `${hari}, ${this.value}`;
+      } else {
+        hariTanggalInput.value = '';
+      }
+    });
+
+    dueInput.addEventListener('change', function () {
+      const tanggal = new Date(this.value);
+      if (!isNaN(tanggal.getTime())) {
+        const hari = hariIndo[tanggal.getDay()];
+        hariDueInput.value = `${hari}, ${this.value}`;
+      } else {
+        hariDueInput.value = '';
+      }
+    });
+
+    function buatTeks() {
+      const jenis = document.getElementById('jenis').value;
+      const pekerjaan = document.getElementById('pekerjaan').value;
+      const area = document.getElementById('area').value;
+      const hariTanggal = document.getElementById('hariTanggal').value;
+      const jamMulai = document.getElementById('jamMulai').value;
+      const jamSelesai = document.getElementById('jamSelesai').value;
+      const hariDue = document.getElementById('hariDue').value;
+      const pembuat = document.getElementById('pembuat').value;
+      const penerima = document.getElementById('penerima').value;
+      const status = document.getElementById('status').value;
+
+      return `
+📄 *OCS NFI Job Desk*
+🗂️ Jenis Pekerjaan: ${jenis}
+📌 Pekerjaan: ${pekerjaan}
+📍 Area: ${area}
+🗓️ Hari & Tanggal: ${hariTanggal}
+⏳ Durasi: ${jamMulai} - ${jamSelesai}
+📆 Due Date: ${hariDue}
+🧾 Dibuat oleh: ${pembuat}
+🙎 Penerima tugas: ${penerima}
+🏷️ Status: ${status}
+      `.trim();
+    }
+
+    document.getElementById('taskForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const teks = buatTeks();
+      document.getElementById('output').value = teks;
+      navigator.clipboard.writeText(teks).then(() => {
+        alert("✅ Teks tugas berhasil disalin!");
+      });
+    });
+
+    // Buat tombol WA semua member
+    const waButtonsContainer = document.getElementById("wa-buttons");
+    for (const [name, phone] of Object.entries(nomorWA)) {
+      const btn = document.createElement("button");
+      btn.textContent = `📤 ${name}`;
+      btn.onclick = () => {
+        const teks = document.getElementById("output").value.trim();
+        if (!teks) {
+          alert("❗ Silakan isi dan salin tugas terlebih dahulu.");
+          return;
+        }
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(teks)}`;
+        window.open(url, "_blank");
+      };
+      waButtonsContainer.appendChild(btn);
+    }
+  </script>
 </body>
 </html>
