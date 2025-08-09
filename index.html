@@ -127,13 +127,6 @@
         <option value="M. Rifai">M. Rifai</option>
       </select>
 
-      <label>Status Tugas</label>
-      <select id="status" required>
-        <option value="Belum dikerjakan">Belum dikerjakan</option>
-        <option value="Sedang dikerjakan">Sedang dikerjakan</option>
-        <option value="Selesai">Selesai</option>
-      </select>
-
       <button type="submit">🧾 Salin ke Clipboard</button>
     </form>
 
@@ -196,7 +189,6 @@
       const hariDue = document.getElementById('hariDue').value;
       const pembuat = document.getElementById('pembuat').value;
       const penerima = document.getElementById('penerima').value;
-      const status = document.getElementById('status').value;
 
       return `
 📄 *OCS NFI Job Desk*
@@ -208,7 +200,6 @@
 📆 Due Date: ${hariDue}
 🧾 Dibuat oleh: ${pembuat}
 🙎 Penerima tugas: ${penerima}
-🏷️ Status: ${status}
       `.trim();
     }
 
